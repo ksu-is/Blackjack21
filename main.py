@@ -13,11 +13,12 @@ class Deck:
     def __init__(self):
         self.cards = [Card(s, v) for s in ["Spades", "Clubs", "Hearts", "Diamonds"]
                       for v in ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]]
-
+# shuffle cards 
     def shuffle(self):
         if len(self.cards) > 1:
             random.shuffle(self.cards)
-    
+        
+# Dealing cards
     def deal(self):
         if len(self.cards) > 1:
             return self.cards.pop(0)
@@ -31,6 +32,7 @@ class Hand:
     def add_card(self, card):
         self.cards.append(card)
 
+#card value 
     def calculate_value(self):
         self.value = 0
         ace_count = 0
@@ -81,7 +83,7 @@ class Game:
                 self.player_hand.add_card(self.deck.deal())
                 self.dealer_hand.add_card(self.deck.deal())
             
-            print("Your hand is:")
+            print("Player hand is:")
             self.player_hand.display()
             print()
             print("Dealer's hand is: ")
@@ -131,17 +133,17 @@ class Game:
                     dealer_hand_value = self.dealer_hand.get_value()
 
                     print("Final Results")
-                    print("Your hand:", player_hand_value)
+                    print("Player hand:", player_hand_value)
                     print("Dealer's hand:", dealer_hand_value)
 
                     if player_hand_value > 21:
-                        print("You Bust! Dealer Wins!")
+                        print("Player Bust! Dealer Wins!")
                     elif dealer_hand_value > 21:
                         print("Dealer Busts! You Win!")
                     elif player_hand_value > dealer_hand_value:
-                        print("You Win!")
+                        print("Player Win!")
                     elif player_hand_value == dealer_hand_value:
-                        print("Tie!")
+                        print("Push!")
                     else:
                         print("Dealer Wins!")
 
@@ -171,13 +173,12 @@ class Game:
 
     def show_blackjack_results(self, player_has_blackjack, dealer_has_blackjack):
         if player_has_blackjack and dealer_has_blackjack:
-            print("Both players have blackjack! Draw!")
+            print("Both players have blackjack! Push!")
         elif player_has_blackjack:
-            print("Player has blackjack! Player wins!")
+            print("Player has blackjack! ")
         elif dealer_has_blackjack:
-            print("Dealer has blackjack! Dealer wins!")
+            print("Dealer has blackjack! ")
 
 if __name__ == "__main__":
     g = Game()
     g.play()
-    
