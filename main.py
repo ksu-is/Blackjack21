@@ -8,11 +8,15 @@ class Card:
     
     def __repr__(self):
         return " of ".join((self.value, self.suit))
-
+# card values
 class Deck:
-    def __init__(self):
-        self.cards = [Card(s, v) for s in ["Spades", "Clubs", "Hearts", "Diamonds"]
-                      for v in ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]]
+    def __init__(self, num_decks=6):  # 6 decks 
+        self.cards = [
+            Card(s, v) 
+            for _ in range(num_decks)  # Repeat for each deck
+            for s in ["Spades", "Clubs", "Hearts", "Diamonds"]
+            for v in ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+        ]
 # shuffle cards 
     def shuffle(self):
         if len(self.cards) > 1:
@@ -22,13 +26,14 @@ class Deck:
     def deal(self):
         if len(self.cards) > 1:
             return self.cards.pop(0)
-
+# Represent dealer and player hands 
 class Hand:
     def __init__(self, dealer=False):
         self.dealer = dealer
         self.cards = []
         self.value = 0
 
+# function to add a card 
     def add_card(self, card):
         self.cards.append(card)
 
@@ -83,6 +88,7 @@ class Game:
                 self.player_hand.add_card(self.deck.deal())
                 self.dealer_hand.add_card(self.deck.deal())
             
+            # show value of hand 
             print("Player hand is:")
             self.player_hand.display()
             print()
@@ -114,7 +120,8 @@ class Game:
                         game_over = True
                     else:
                         choice = 'stand'  # Automatically stand after doubling down
-
+                
+                # display hit fucntion if bust and hit 
                 if choice in ['hit', 'h'] and not doubled_down:
                     self.player_hand.add_card(self.deck.deal())
                     self.player_hand.display()
@@ -131,7 +138,8 @@ class Game:
 
                     player_hand_value = self.player_hand.get_value()
                     dealer_hand_value = self.dealer_hand.get_value()
-
+                    
+                    # display final results 
                     print("Final Results")
                     print("Player hand:", player_hand_value)
                     print("Dealer's hand:", dealer_hand_value)
@@ -148,7 +156,8 @@ class Game:
                         print("Dealer Wins!")
 
                     game_over = True
-
+            
+            # display to play agin with function 
             again = input("Play Again? (Y/N) ")
             while again.lower() not in ["y", "n"]:
                 again = input("Please enter Y or N ")
@@ -160,7 +169,7 @@ class Game:
 
     def player_is_over(self):
         return self.player_hand.get_value() > 21
-
+    # check for black jack 
     def check_for_blackjack(self):
         player = False
         dealer = False
@@ -170,7 +179,7 @@ class Game:
             dealer = True
 
         return player, dealer
-
+    # Shows Black Jack Display
     def show_blackjack_results(self, player_has_blackjack, dealer_has_blackjack):
         if player_has_blackjack and dealer_has_blackjack:
             print("Both players have blackjack! Push!")
