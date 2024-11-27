@@ -2,8 +2,8 @@
 This is a project for Application Develepment by Quy Trinh
 
 # How to use
-Simply open the file by clonning, forking etc to get access to code
-Run in terminal and have fun. 
+Simply open the file by clonning or forking etc to get access to code
+Run the code in the terminal and have fun. 
 
 # Goal of Blackjack 
 The goal of the game is to get a hand value as close to 21 as possible without exceeding it, while also beating the dealer’s hand.
@@ -20,3 +20,8 @@ Dealer Bust by going over 21.
 vice versa for players 
 *note push is a draw if players tie 
 
+# Additional notes 
+This is one deck black jack 
+
+# Source Code 
+https://github.com/Quantsol/Simple-Blackjack-Game 
